@@ -12,7 +12,6 @@ public interface LocationService {
 
     List<Location> getAllLocations();
 
-    CurrentWeather getCurrentWeather(String location);
 
 
 }

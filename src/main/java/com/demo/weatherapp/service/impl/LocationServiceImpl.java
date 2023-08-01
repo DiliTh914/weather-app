@@ -58,8 +58,5 @@ public class LocationServiceImpl implements LocationService {
         return locationDAO.getALlLocations();
     }
 
-    @Override
-    public CurrentWeather getCurrentWeather(String location) {
-        return weatherAPI.getCurrentWeather(location);
-    }
+
 }

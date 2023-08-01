@@ -6,11 +6,12 @@ import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 
 import java.io.IOException;
-import java.time.Instant;
+import java.time.LocalDateTime;
 
-public class InstantDeserializer extends JsonDeserializer<Instant> {
+public class LocalDateTimeDeserializer extends JsonDeserializer<LocalDateTime> {
+
     @Override
-    public Instant deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
-        return SerializationHelper.getInstantFromLong(p.getLongValue());
+    public LocalDateTime deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {
+        return SerializationHelper.getLocalDateTimeFromString(p.getText());
     }
 }

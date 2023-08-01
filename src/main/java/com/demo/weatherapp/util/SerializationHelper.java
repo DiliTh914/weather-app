@@ -1,6 +1,7 @@
 package com.demo.weatherapp.util;
 
 import java.time.Instant;
+import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 
 public class SerializationHelper {
@@ -12,5 +13,9 @@ public class SerializationHelper {
 
     public static Instant getInstantFromLong(Long epochSecond) {
         return Instant.ofEpochSecond(epochSecond);
+    }
+
+    public static LocalDateTime getLocalDateTimeFromString(String text) {
+        return LocalDateTime.parse(text, formatter);
     }
 }

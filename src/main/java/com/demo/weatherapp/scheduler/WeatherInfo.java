@@ -3,26 +3,30 @@ package com.demo.weatherapp.scheduler;
 import com.demo.weatherapp.dto.external.CurrentWeather;
 import com.demo.weatherapp.model.Location;
 import com.demo.weatherapp.service.LocationService;
+import com.demo.weatherapp.service.WeatherService;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.Random;
-import java.util.concurrent.*;
-import java.util.stream.IntStream;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
 
 @Component
 @EnableScheduling
 public class WeatherInfo {
 
     private final LocationService locationService;
+    private final WeatherService weatherService;
 
-    ExecutorService executorService = Executors.newFixedThreadPool(3);
+    ExecutorService executorService = Executors.newFixedThreadPool(10);
 
-    public WeatherInfo(LocationService locationService) {
+    public WeatherInfo(LocationService locationService, WeatherService weatherService) {
         this.locationService = locationService;
+        this.weatherService = weatherService;
     }
 
     @Scheduled(fixedDelay = 10, timeUnit = TimeUnit.SECONDS)
@@ -33,19 +37,7 @@ public class WeatherInfo {
 
         CountDownLatch latch = new CountDownLatch(locations.size());
 
-        locations.forEach(location -> {
-
-            executorService.submit(() -> {
-
-                try {
-                    test(location, latch);
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-
-            });
-
-        });
+        locations.forEach(location -> executorService.submit(() -> addHistoryEvent(location, latch)));
 
         try {
             latch.await();
@@ -56,10 +48,9 @@ public class WeatherInfo {
         System.out.println("total time: " + (Instant.now().toEpochMilli() - first));
     }
 
-    private void test(Location location, CountDownLatch latch) throws Exception {
-        System.out.println("start "+location.getLocationCode());
-        Thread.sleep(5000+ new Random().nextInt(2)*1000);
-        System.out.println("end "+location.getLocationCode());
+    private void addHistoryEvent(Location location, CountDownLatch latch) {
+        CurrentWeather currentWeather = weatherService.getCurrentWeather(location.getName());
+
         latch.countDown();
     }
 

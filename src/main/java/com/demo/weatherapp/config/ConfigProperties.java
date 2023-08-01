@@ -16,7 +16,7 @@ public class ConfigProperties {
 
     @Getter
     @Setter
-    private static class WeatherAPIProps {
+    public static class WeatherAPIProps {
         private String baseUrl;
         private String accessKey;
     }

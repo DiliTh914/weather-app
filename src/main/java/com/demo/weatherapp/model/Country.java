@@ -7,6 +7,7 @@ import lombok.Setter;
 
 @NoArgsConstructor
 @Getter
+@Setter
 @Entity
 @Table(name = "countries")
 public class Country {
@@ -15,15 +16,13 @@ public class Country {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Setter
     @Column(unique = true)
     private String countryCode;
 
-    @Setter
     private String name;
 
-    public Country(String countryCode, String name) {
-        this.countryCode = countryCode;
+    public Country(String name, String countryCode) {
         this.name = name;
+        this.countryCode = countryCode;
     }
 }

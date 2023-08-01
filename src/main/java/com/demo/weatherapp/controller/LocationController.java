@@ -1,6 +1,6 @@
 package com.demo.weatherapp.controller;
 
-import com.demo.weatherapp.model.Location;
+import com.demo.weatherapp.dto.internal.LocationDTO;
 import com.demo.weatherapp.service.LocationService;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,8 +18,7 @@ public class LocationController {
     }
 
     @PostMapping
-    public Location addLocation(@RequestParam String location) {
-        locationService.createLocation(location);
-        return null;
+    public LocationDTO addLocation(@RequestParam String location) {
+        return locationService.createLocation(location);
     }
 }

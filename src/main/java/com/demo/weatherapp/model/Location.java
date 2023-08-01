@@ -7,6 +7,7 @@ import lombok.Setter;
 
 @NoArgsConstructor
 @Getter
+@Setter
 @Entity
 @Table(name = "location")
 public class Location {
@@ -15,27 +16,25 @@ public class Location {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Setter
     @Column(unique = true)
     private String locationCode;
 
-    @Setter
     private String name;
 
-    @Setter
     private String region;
 
-    @Setter
     private String countryCode;
 
-    @Setter
     private String timeZoneId;
 
-    public Location(String locationCode, String name, String region, String countryCode, String timeZoneId) {
+    private String timeZoneOffSet;
+
+    public Location(String locationCode, String name, String region, String countryCode, String timeZoneId,String timeZoneOffSet) {
         this.locationCode = locationCode;
         this.name = name;
         this.region = region;
         this.countryCode = countryCode;
         this.timeZoneId = timeZoneId;
+        this.timeZoneOffSet = timeZoneOffSet;
     }
 }

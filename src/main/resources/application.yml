@@ -11,3 +11,8 @@ spring:
     hibernate:
       format_sql: true
       dialect: org.hibernate.dialect.PostgreSQL81Dialect
+
+app:
+  weatherApi:
+    baseUrl: http://api.weatherapi.com
+    accessKey: ${WEATHER_API_ACCESS_KEY}

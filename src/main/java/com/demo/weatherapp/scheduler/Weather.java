@@ -10,7 +10,7 @@ import java.time.Instant;
 import java.util.concurrent.TimeUnit;
 
 @Component
-@EnableScheduling
+//@EnableScheduling
 public class Weather {
 
     @Autowired

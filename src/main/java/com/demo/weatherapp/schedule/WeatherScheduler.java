@@ -1,6 +1,8 @@
-package com.demo.weatherapp.scheduler;
+package com.demo.weatherapp.schedule;
 
 import com.demo.weatherapp.dto.external.CurrentWeather;
+import com.demo.weatherapp.dto.internal.CurrentWeatherDTO;
+import com.demo.weatherapp.message.MessageHandler;
 import com.demo.weatherapp.model.Location;
 import com.demo.weatherapp.service.LocationService;
 import com.demo.weatherapp.service.WeatherService;
@@ -10,34 +12,33 @@ import org.springframework.stereotype.Component;
 
 import java.time.Instant;
 import java.util.List;
-import java.util.concurrent.CountDownLatch;
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.Executors;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 @Component
 @EnableScheduling
-public class WeatherInfo {
+public class WeatherScheduler {
 
     private final LocationService locationService;
     private final WeatherService weatherService;
+    private final MessageHandler messageHandler;
 
     ExecutorService executorService = Executors.newFixedThreadPool(10);
 
-    public WeatherInfo(LocationService locationService, WeatherService weatherService) {
+    public WeatherScheduler(LocationService locationService, WeatherService weatherService, MessageHandler messageHandler) {
         this.locationService = locationService;
         this.weatherService = weatherService;
+        this.messageHandler = messageHandler;
     }
 
-    @Scheduled(fixedDelay = 10, timeUnit = TimeUnit.SECONDS)
-    public void currentWeather() {
+    @Scheduled(fixedDelay = 10000, timeUnit = TimeUnit.SECONDS)
+    public void getCurrentWeather() {
         System.out.println("starting scheduler");
         long first = Instant.now().toEpochMilli();
         List<Location> locations = locationService.getAllLocations();
 
         CountDownLatch latch = new CountDownLatch(locations.size());
 
-        locations.forEach(location -> executorService.submit(() -> addHistoryEvent(location, latch)));
+        locations.forEach(location -> executorService.submit(() -> sendHistoryEvent(location, latch)));
 
         try {
             latch.await();
@@ -48,11 +49,13 @@ public class WeatherInfo {
         System.out.println("total time: " + (Instant.now().toEpochMilli() - first));
     }
 
-    private void addHistoryEvent(Location location, CountDownLatch latch) {
-        CurrentWeather currentWeather = weatherService.getCurrentWeather(location.getName());
-
+    private void sendHistoryEvent(Location location, CountDownLatch latch) {
+        CurrentWeatherDTO currentWeather = weatherService.getCurrentWeather(location.getName());
+        messageHandler.sendCurrentWeatherMessage(currentWeather);
         latch.countDown();
     }
+
+
 
 
 }

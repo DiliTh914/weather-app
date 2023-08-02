@@ -1,4 +1,4 @@
-package com.demo.weatherapp.serializer;
+package com.demo.weatherapp.serializer.jackson;
 
 import com.demo.weatherapp.util.SerializationHelper;
 import com.fasterxml.jackson.core.JsonParser;
@@ -8,7 +8,7 @@ import com.fasterxml.jackson.databind.JsonDeserializer;
 import java.io.IOException;
 import java.time.LocalDateTime;
 
-public class LocalDateTimeDeserializer extends JsonDeserializer<LocalDateTime> {
+public class LocalDateTimeStringDeserializer extends JsonDeserializer<LocalDateTime> {
 
     @Override
     public LocalDateTime deserialize(JsonParser p, DeserializationContext ctxt) throws IOException {

@@ -27,13 +27,12 @@ public class ConfigProperties {
     @Getter
     @Setter
     public static class KafkaProps {
-        private List<Topic> topics;
+        private Topic topics;
 
         @Getter
         @Setter
         public static class Topic {
-            private String name;
-            private MessageType identifier;
+            private String rawCurrentWeatherData;
 
         }
 

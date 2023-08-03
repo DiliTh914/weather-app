@@ -1,6 +1,6 @@
 package com.demo.weatherapp.dao;
 
-import com.demo.weatherapp.entity.Country;
+import com.demo.weatherapp.entity.location.Country;
 
 import java.util.List;
 

@@ -7,4 +7,6 @@ public interface WeatherService {
     CurrentWeatherDTO getCurrentWeather(String location);
 
     LocationZone getWeatherLocation(String locationName);
+
+    void saveWeatherHistory(CurrentWeatherDTO currentWeatherDTO);
 }

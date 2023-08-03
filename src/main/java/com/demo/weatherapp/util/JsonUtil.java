@@ -14,7 +14,7 @@ public class JsonUtil {
     private JsonUtil() {
     }
 
-    private static final Gson GSON  = new GsonBuilder()
+    private static final Gson gson  = new GsonBuilder()
             .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeSerializer())
             .registerTypeAdapter(LocalDateTime.class, new LocalDateTimeDeserializer())
             .registerTypeAdapter(Instant.class, new InstantStringSerializer())
@@ -22,6 +22,10 @@ public class JsonUtil {
             .create();
 
     public static String objectToJsonString(Object object) {
-        return GSON.toJson(object);
+        return gson.toJson(object);
+    }
+
+    public static <T> T jsonStringToObject(String value, Class<T> returnType) {
+        return gson.fromJson(value,returnType);
     }
 }

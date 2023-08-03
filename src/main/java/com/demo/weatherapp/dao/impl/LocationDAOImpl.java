@@ -1,9 +1,9 @@
 package com.demo.weatherapp.dao.impl;
 
 import com.demo.weatherapp.dao.LocationDAO;
-import com.demo.weatherapp.entity.Country;
-import com.demo.weatherapp.entity.Location;
-import com.demo.weatherapp.entity.TimeZone;
+import com.demo.weatherapp.entity.location.Country;
+import com.demo.weatherapp.entity.location.Location;
+import com.demo.weatherapp.entity.location.TimeZone;
 import com.demo.weatherapp.repository.LocationRepository;
 import org.springframework.stereotype.Service;
 

@@ -1,8 +1,8 @@
 package com.demo.weatherapp.dao;
 
-import com.demo.weatherapp.entity.Country;
-import com.demo.weatherapp.entity.Location;
-import com.demo.weatherapp.entity.TimeZone;
+import com.demo.weatherapp.entity.location.Country;
+import com.demo.weatherapp.entity.location.Location;
+import com.demo.weatherapp.entity.location.TimeZone;
 
 import java.util.List;
 

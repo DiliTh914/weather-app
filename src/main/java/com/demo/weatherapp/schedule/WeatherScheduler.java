@@ -2,10 +2,11 @@ package com.demo.weatherapp.schedule;
 
 import com.demo.weatherapp.dto.internal.CurrentWeatherDTO;
 import com.demo.weatherapp.message.MessageHandler;
-import com.demo.weatherapp.entity.Location;
+import com.demo.weatherapp.entity.location.Location;
 import com.demo.weatherapp.service.LocationService;
 import com.demo.weatherapp.service.WeatherService;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.time.Instant;
@@ -28,7 +29,7 @@ public class WeatherScheduler {
         this.messageHandler = messageHandler;
     }
 
-//    @Scheduled(fixedDelay = 10000, timeUnit = TimeUnit.SECONDS)
+    @Scheduled(fixedDelay = 10, timeUnit = TimeUnit.SECONDS)
     public void getCurrentWeather() {
         System.out.println("starting scheduler");
         long first = Instant.now().toEpochMilli();

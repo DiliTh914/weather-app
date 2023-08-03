@@ -1,4 +1,4 @@
-package com.demo.weatherapp.entity;
+package com.demo.weatherapp.entity.location;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;

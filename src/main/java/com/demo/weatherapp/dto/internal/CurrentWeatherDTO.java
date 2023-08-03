@@ -20,7 +20,7 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class CurrentWeatherDTO {
 
-    private String locationCode;
+    private String location;
 
     @JsonSerialize(using = InstantStringSerializer.class)
     @JsonDeserialize(using = InstantStringDeserializer.class)

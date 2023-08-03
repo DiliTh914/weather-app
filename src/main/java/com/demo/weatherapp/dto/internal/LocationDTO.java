@@ -1,6 +1,6 @@
 package com.demo.weatherapp.dto.internal;
 
-import com.demo.weatherapp.entity.Location;
+import com.demo.weatherapp.entity.location.Location;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;

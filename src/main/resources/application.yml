@@ -17,7 +17,12 @@ spring:
       group-id: group_id
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       bootstrap-servers: localhost:29092
-
+    consumer:
+      bootstrap-servers: localhost:29092
+      group-id: group_id
+      auto-offset-reset: earliest
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
 auto:
   create:
     topics:
@@ -32,6 +37,4 @@ app:
     accessKey: ${WEATHER_API_ACCESS_KEY}
   kafka:
     topics:
-      - name: RawCurrentWeatherData
-        identifier: RAW_CURRENT_WEATHER_DATA
-
+      rawCurrentWeatherData: RawCurrentWeatherData

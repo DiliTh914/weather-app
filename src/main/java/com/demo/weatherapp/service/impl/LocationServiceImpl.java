@@ -5,13 +5,12 @@ import com.demo.weatherapp.dao.LocationDAO;
 import com.demo.weatherapp.dto.internal.LocationDTO;
 import com.demo.weatherapp.dto.external.LocationData;
 import com.demo.weatherapp.dto.external.LocationZone;
-import com.demo.weatherapp.entity.Country;
-import com.demo.weatherapp.entity.Location;
-import com.demo.weatherapp.entity.TimeZone;
+import com.demo.weatherapp.entity.location.Country;
+import com.demo.weatherapp.entity.location.Location;
+import com.demo.weatherapp.entity.location.TimeZone;
 import com.demo.weatherapp.service.LocationService;
 import com.demo.weatherapp.service.WeatherService;
 import org.apache.commons.lang3.StringUtils;
-import org.springframework.beans.BeanUtils;
 import org.springframework.stereotype.Service;
 
 import java.time.ZoneId;
@@ -37,12 +36,12 @@ public class LocationServiceImpl implements LocationService {
         LocationData locationData = locationZone.getLocation();
 
         String countryCode = StringUtils.deleteWhitespace(locationData.getCountry().toLowerCase());
-        String locationCode = StringUtils.deleteWhitespace(locationData.getName().toLowerCase());
+        String locationId = getLocationId(locationData.getName());
 
         String zoneOffSet = ZonedDateTime.now(ZoneId.of(locationData.getTimeZoneId())).getOffset().toString();
 
         Location location = locationDAO.createLocation(
-                locationCode,
+                locationId,
                 locationData.getName(),
                 locationData.getRegion(),
                 new Country(countryCode, locationData.getCountry()),
@@ -59,6 +58,11 @@ public class LocationServiceImpl implements LocationService {
     @Override
     public Object getLocation(String locationName) {
         return locationDAO.getALlLocations();
+    }
+
+    @Override
+    public String getLocationId(String locationName) {
+        return StringUtils.deleteWhitespace(locationName.toLowerCase());
     }
 
 

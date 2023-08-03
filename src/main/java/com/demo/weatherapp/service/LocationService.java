@@ -1,8 +1,7 @@
 package com.demo.weatherapp.service;
 
-import com.demo.weatherapp.dto.external.CurrentWeather;
 import com.demo.weatherapp.dto.internal.LocationDTO;
-import com.demo.weatherapp.model.Location;
+import com.demo.weatherapp.entity.Location;
 
 import java.util.List;
 
@@ -12,6 +11,6 @@ public interface LocationService {
 
     List<Location> getAllLocations();
 
-
+    Object getLocation(String locationName);
 
 }

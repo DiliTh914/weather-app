@@ -11,7 +11,7 @@
         <setting name="validation-enabled" value="true" />
         <setting name="provider-name" value="Hibernate" />
         <datasource-mapping>
-          <factory-entry name="weather-app" value="4146c7b7-5e5e-4dd0-8eaa-cc0155ce2ece" />
+          <factory-entry name="weather-app" value="2844e8cc-9215-4399-b95a-f4318677dcdb" />
         </datasource-mapping>
         <naming-strategy-map />
       </configuration>

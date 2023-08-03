@@ -1,9 +1,11 @@
 package com.demo.weatherapp.dao.impl;
 
 import com.demo.weatherapp.dao.CountryDAO;
-import com.demo.weatherapp.model.Country;
+import com.demo.weatherapp.entity.Country;
 import com.demo.weatherapp.repository.CountryRepository;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class CountryDAOImpl implements CountryDAO {
@@ -16,11 +18,14 @@ public class CountryDAOImpl implements CountryDAO {
 
     @Override
     public Country createCountry(String name, String countryCode) {
-        return countryRepository.save(new Country(name, countryCode));
+        return null;
+//        return countryRepository.save(new Country(name));
     }
 
+
+
     @Override
-    public boolean isCountryExists(String countryCode) {
-        return countryRepository.existsCountryByCountryCode(countryCode);
+    public List<Country> getAllCountries() {
+        return countryRepository.findAll();
     }
 }

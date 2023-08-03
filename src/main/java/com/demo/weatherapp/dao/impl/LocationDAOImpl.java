@@ -1,7 +1,9 @@
 package com.demo.weatherapp.dao.impl;
 
 import com.demo.weatherapp.dao.LocationDAO;
-import com.demo.weatherapp.model.Location;
+import com.demo.weatherapp.entity.Country;
+import com.demo.weatherapp.entity.Location;
+import com.demo.weatherapp.entity.TimeZone;
 import com.demo.weatherapp.repository.LocationRepository;
 import org.springframework.stereotype.Service;
 
@@ -17,8 +19,8 @@ public class LocationDAOImpl implements LocationDAO {
     }
 
     @Override
-    public Location createLocation(String locationCode, String name, String region, String countryCode, String timeZoneId, String timeZoneOffSet) {
-        return locationRepository.save(new Location(locationCode, name, region, countryCode, timeZoneId, timeZoneOffSet));
+    public Location createLocation(String id, String name, String region, Country country, TimeZone timeZone) {
+        return locationRepository.save(new Location(id, name, region, country, timeZone));
     }
 
     @Override

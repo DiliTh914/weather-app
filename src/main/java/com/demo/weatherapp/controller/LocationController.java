@@ -1,11 +1,9 @@
 package com.demo.weatherapp.controller;
 
 import com.demo.weatherapp.dto.internal.LocationDTO;
+import com.demo.weatherapp.dto.internal.LocationInboundDTO;
 import com.demo.weatherapp.service.LocationService;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("locations")
@@ -18,7 +16,12 @@ public class LocationController {
     }
 
     @PostMapping
-    public LocationDTO addLocation(@RequestParam String location) {
-        return locationService.createLocation(location);
+    public LocationDTO addLocation(@RequestBody LocationInboundDTO inboundDTO) {
+        return locationService.createLocation(inboundDTO.getName());
+    }
+
+    @GetMapping("{locationName}")
+    public Object getLocation(@PathVariable String locationName) {
+        return locationService.getLocation(locationName);
     }
 }
